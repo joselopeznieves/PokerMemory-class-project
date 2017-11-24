@@ -140,6 +140,48 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 		panel_1.add(horizontalStrut_3);
 	}
 	
+	@Override
+	public void newGame(String difficultyMode) throws IOException
+	{
+		// Reset the turn counter label
+		this.turnCounterLabel.reset();
+
+		// make a new card field with cards, and add it to the window
+
+		if(difficultyMode.equalsIgnoreCase("easy")) {
+			this.difficulty = new EasyLevel(this.turnCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Easy Level");
+		}
+		else if(difficultyMode.equalsIgnoreCase("equalpair")){
+			this.difficulty = new EqualPairLevel(this.turnCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Equal Pair Level");
+		}
+
+		else if(difficultyMode.equalsIgnoreCase("ranktrio")){
+			this.difficulty = new RankTrioLevel(this.turnCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
+		}
+		
+		else if(difficultyMode.equalsIgnoreCase("flushlevel")){
+			this.difficulty = new FlushLevel(this.turnCounterLabel, this);
+			this.getLevelDescriptionLabel().setText("Flush Level");
+		}
+
+		else {
+			throw new RuntimeException("Illegal Game Level Detected");
+		}
+
+		this.turnCounterLabel.reset();
+
+		// clear out the content pane (removes turn counter label and card field)
+		BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+		this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+		this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
+
+		// show the window (in case this is the first game)
+		this.setVisible(true);
+	}
+	
 	private void showInstructions()
 	{
 		dprintln("MemoryGame.showInstructions()");
