@@ -182,6 +182,20 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 		this.setVisible(true);
 	}
 	
+	public JPanel showCardDeck()
+	{
+		// make the panel to hold all of the cards
+		JPanel panel = new JPanel(new GridLayout(difficulty.getRowsPerGrid(),difficulty.getCardsPerRow()));
+
+		// this set of cards must have their own manager
+		this.difficulty.makeDeck();
+
+		for(int i= 0; i<difficulty.getGrid().size();i++){
+			panel.add(difficulty.getGrid().get(i));
+		}
+		return panel;
+	}
+	
 	private void showInstructions()
 	{
 		dprintln("MemoryGame.showInstructions()");
@@ -211,6 +225,12 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						"over automatically after a short delay.  Continue flipping\r\n"+
 						"cards until you have discovered all of the pairs.  The game\r\n"+
 						"is won when all cards are face up.\r\n"+
+						"\r\n"+
+						"FLUSH Level\r\n"+
+						"The deck is made of distinct cards. You  may reveal five cards \r\n"+
+						"each turn. The goal of this mode is to reveal five cards with the \r\n"+
+						"same suit. When all possible combination of cards are uncovered, \r\n"+
+						"the game is won.\r\n"+
 						"\r\n"+
 						"Each time you flip two cards up, the turn counter will\r\n"+
 						"increase.  Try to win the game in the fewest number of turns!";

@@ -25,7 +25,7 @@ public class GameManager {
 
 		int playMore = 2;
 		while (playMore != 1) {
-			MemoryFrame instance = new MemoryFrame();
+			UpdatedMemoryFrame instance = new UpdatedMemoryFrame();
 			instance.newGame("easy");
 
 			while(!instance.gameOver()) {
