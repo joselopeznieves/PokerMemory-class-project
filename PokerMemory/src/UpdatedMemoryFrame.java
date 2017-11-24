@@ -32,6 +32,14 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 	private JPanel centerGrid;
 	private JLabel levelDescriptionLabel;
 	
+	public JLabel getLevelDescriptionLabel() {
+		return levelDescriptionLabel;
+	}
+	
+	public void setLevelDescriptionLabel(JLabel levelDescriptionLabel) {
+		this.levelDescriptionLabel = levelDescriptionLabel;
+	}
+	
 	
 	public UpdatedMemoryFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
