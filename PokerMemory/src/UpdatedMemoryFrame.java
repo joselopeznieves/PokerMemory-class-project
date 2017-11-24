@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -194,6 +195,10 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 			panel.add(difficulty.getGrid().get(i));
 		}
 		return panel;
+	}
+	
+	public boolean gameOver() throws FileNotFoundException, InterruptedException{
+		return difficulty.isGameOver();
 	}
 	
 	private void showInstructions()
