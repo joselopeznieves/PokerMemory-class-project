@@ -35,14 +35,14 @@ public class UpdatedEqualPairLevel extends EqualPairLevel {
 				Card otherCard = (Card) this.getTurnedCardsBuffer().get(0);
 				// the cards match, so remove them from the list (they will remain face up)
 				if( otherCard.getNum() == card.getNum()) {
-					this.setScore(this.getScore() + 50);
-					System.out.println(getScore());
+					this.score += 50;
+					System.out.println(this.score);
 					this.getTurnedCardsBuffer().clear();
 				}
 				// the cards do not match, so start the timer to turn them down
 				else {
-					this.setScore(this.getScore() - 5);
-					System.out.println(getScore());
+					this.score -= 5;
+					System.out.println(this.score);
 					this.getTurnDownTimer().start();
 				}
 			}

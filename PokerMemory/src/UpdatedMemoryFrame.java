@@ -44,7 +44,8 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if(e.getActionCommand().equals("Flush Level")) newGame("flushlevel");
-                    else if(e.getActionCommand().equals("Equal Level")) newGame("updatedEqualPair");
+                    else if(e.getActionCommand().equals("Equal Pairr Level")) newGame("updatedEqualPair");
+                    else if(e.getActionCommand().equals("Same Rank Trio Levell")) newGame("updatedRankTrio");
                 } catch (IOException e2) {
                     e2.printStackTrace(); throw new RuntimeException("IO ERROR");
                 }
@@ -55,9 +56,13 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         flushLevelMenuItem.addActionListener(menuHandler);
         memoryMenu.add(flushLevelMenuItem);
         
-        JMenuItem updatedEqualPairMenuItem = new JMenuItem("Equal Level");
+        JMenuItem updatedEqualPairMenuItem = new JMenuItem("Equal Pairr Level");
         updatedEqualPairMenuItem.addActionListener(menuHandler);
         memoryMenu.add(updatedEqualPairMenuItem);
+        
+        JMenuItem updatedRankTrioMenuItem = new JMenuItem("Same Rank Trio Levell");
+        updatedRankTrioMenuItem.addActionListener(menuHandler);
+        memoryMenu.add(updatedRankTrioMenuItem);
     }
 
     /**
@@ -79,9 +84,13 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         }
         else if(difficultyMode.equalsIgnoreCase("updatedEqualPair")) {
         	this.setGameLevel(new UpdatedEqualPairLevel(this.getTurnCounterLabel(), this));
-        	this.getLevelDescriptionLabel().setText("Equal Pair Level");
+        	this.getLevelDescriptionLabel().setText("Equal Pairr Level");
         	this.getTurnCounterLabel().reset();
-       
+        }
+        else if(difficultyMode.equalsIgnoreCase("updatedRankTrio")) {
+        	this.setGameLevel(new UpdatedRankTrio(this.getTurnCounterLabel(), this));
+        	this.getLevelDescriptionLabel().setText("Same Rank Trio Levell");
+        	this.getTurnCounterLabel().reset();
         }
         else {
             super.newGame(difficultyMode);
