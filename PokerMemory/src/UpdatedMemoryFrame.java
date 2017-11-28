@@ -42,6 +42,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         
         ActionListener menuHandler = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	dprintln("actionPerformed " + e.getActionCommand());
                 try {
                     if(e.getActionCommand().equals("Flush Level")) newGame("flushlevel");
                     else if(e.getActionCommand().equals("Equal Pairr Level")) newGame("updatedEqualPair");
@@ -80,27 +81,41 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             this.setGameLevel(new FlushLevel(this.getTurnCounterLabel(), this));
             this.getLevelDescriptionLabel().setText("Flush Level");
             this.getTurnCounterLabel().reset();
+            
+         // clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
 
         }
         else if(difficultyMode.equalsIgnoreCase("updatedEqualPair")) {
         	this.setGameLevel(new UpdatedEqualPairLevel(this.getTurnCounterLabel(), this));
         	this.getLevelDescriptionLabel().setText("Equal Pairr Level");
         	this.getTurnCounterLabel().reset();
+        	
+        	// clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
         }
         else if(difficultyMode.equalsIgnoreCase("updatedRankTrio")) {
         	this.setGameLevel(new UpdatedRankTrio(this.getTurnCounterLabel(), this));
         	this.getLevelDescriptionLabel().setText("Same Rank Trio Levell");
         	this.getTurnCounterLabel().reset();
+        	
+        	// clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
         }
         else {
             super.newGame(difficultyMode);
         }
         
+       
+        
      	
-   	 // clear out the content pane (removes turn counter label and card field)
-       BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
-       this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
-       this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
+   	 
 
        // show the window (in case this is the first game)
        this.setVisible(true);

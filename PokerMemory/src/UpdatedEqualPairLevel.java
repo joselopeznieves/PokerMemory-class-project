@@ -17,7 +17,8 @@ public class UpdatedEqualPairLevel extends EqualPairLevel {
 
 	protected UpdatedEqualPairLevel(TurnsTakenCounterLabel validTurnTime, JFrame mainFrame) {
 		super(validTurnTime, mainFrame);
-		super.getTurnsTakenCounter().setDifficultyModeLabel("Medium Level");
+		super.getTurnsTakenCounter().setDifficultyModeLabel("Equal Pair Level");
+		this.getMainFrame().setScore(getScore());
 	}
 	
 	@Override
@@ -36,13 +37,13 @@ public class UpdatedEqualPairLevel extends EqualPairLevel {
 				// the cards match, so remove them from the list (they will remain face up)
 				if( otherCard.getNum() == card.getNum()) {
 					this.score += 50;
-					System.out.println(this.score);
+					this.getMainFrame().setScore(getScore());
 					this.getTurnedCardsBuffer().clear();
 				}
 				// the cards do not match, so start the timer to turn them down
 				else {
 					this.score -= 5;
-					System.out.println(this.score);
+					this.getMainFrame().setScore(getScore());
 					this.getTurnDownTimer().start();
 				}
 			}

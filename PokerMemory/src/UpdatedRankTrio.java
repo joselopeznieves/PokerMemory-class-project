@@ -16,7 +16,8 @@ public class UpdatedRankTrio extends RankTrioLevel {
 
 	public UpdatedRankTrio(TurnsTakenCounterLabel validTurnTime, JFrame mainFrame) {
 		super(validTurnTime, mainFrame);
-		super.getTurnsTakenCounter().setDifficultyModeLabel("Trio Level");
+		super.getTurnsTakenCounter().setDifficultyModeLabel("Same Rank Trio Level");
+		this.getMainFrame().setScore(getScore());
 	}
 	
 	@Override
@@ -36,12 +37,14 @@ public class UpdatedRankTrio extends RankTrioLevel {
 				Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
 				if((card.getRank().equals(otherCard1.getRank())) && (card.getRank().equals(otherCard2.getRank()))) {
 					this.setScore(this.calculateScore(getTurnedCardsBuffer())); 
+					this.getMainFrame().setScore(getScore());
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
 				}
 				else
 				{
 					this.setScore(this.getScore() - 5); 
+					this.getMainFrame().setScore(getScore());
 					// The cards do not match, so start the timer to turn them down
 					this.getTurnDownTimer().start();
 				}

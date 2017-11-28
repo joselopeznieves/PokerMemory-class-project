@@ -6,13 +6,13 @@ import javax.swing.JFrame;
 
 public class FlushLevel extends RankTrioLevel {
 	
-	private int score = 0;
+	private long score = 0;
 	
-	public int getScore() {
+	public long getScore() {
 		return score;
 	}
 	
-	public void setScore(int score) {
+	public void setScore(long score) {
 		this.score = score;
 	}
 	
@@ -22,6 +22,7 @@ public class FlushLevel extends RankTrioLevel {
 		super(validTurnTime, mainFrame);
 		this.getTurnsTakenCounter().setDifficultyModeLabel("Flush Level");
 		this.setCardsToTurnUp(5);
+		this.getMainFrame().setScore(getScore());
 	}
 	
 	// The make deck method stays the same, since we want a deck without repetitions
@@ -52,6 +53,7 @@ public class FlushLevel extends RankTrioLevel {
 						&& (card.getSuit().equals(otherCard4.getSuit()))) {
 					//Calculate and set Score
 					this.setScore(this.calculateScore(getTurnedCardsBuffer()));
+					this.getMainFrame().setScore(getScore());
 					// Five cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
 				
@@ -60,6 +62,7 @@ public class FlushLevel extends RankTrioLevel {
 				{
 					//Subtract 5 from the score 
 					this.setScore(this.getScore() - 5);
+					this.getMainFrame().setScore(getScore());
 					// The cards do not match, so start the timer to turn them down 
 					this.getTurnDownTimer().start();
 				}
@@ -69,9 +72,9 @@ public class FlushLevel extends RankTrioLevel {
 		return false;
 	}
 	
-	public int calculateScore(Vector<Card> turnedCardsBuffer) {
+	public long calculateScore(Vector<Card> turnedCardsBuffer) {
 			
-		int rankSum = 0;
+		long rankSum = 0;
 		//Calculate the sum of ranks 
 		//Special consideration for the special ranks are represented in the switch
 		for(int i = 0; i < this.getTurnedCardsBuffer().size(); i++) {
@@ -96,7 +99,7 @@ public class FlushLevel extends RankTrioLevel {
 			}
 		}
 		
-		int score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
+		long score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
 		return score;
 		
 	}
