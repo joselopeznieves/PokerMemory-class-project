@@ -1,8 +1,20 @@
 
 
+import java.util.Vector;
+
 import javax.swing.JFrame;
 
 public class FlushLevel extends RankTrioLevel {
+	
+	private int score = 0;
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
 	
 	//Flush Level: turn up 5 cards each turn. Cards must be of matching suits 
 
@@ -38,17 +50,54 @@ public class FlushLevel extends RankTrioLevel {
 						&& (card.getSuit().equals(otherCard2.getSuit()))
 						&& (card.getSuit().equals(otherCard3.getSuit()))
 						&& (card.getSuit().equals(otherCard4.getSuit()))) {
-					// Three cards match, so remove them from the list (they will remain face up)
+					//Calculate and set Score
+					this.setScore(this.calculateScore(this.getTurnedCardsBuffer()));
+					// Five cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
+				
 				}
 				else
 				{
-					// The cards do not match, so start the timer to turn them down
+					//Subtract 5 from the score 
+					this.setScore(this.getScore() - 5);
+					// The cards do not match, so start the timer to turn them down 
 					this.getTurnDownTimer().start();
 				}
 			}
 			return true;
 		}
 		return false;
+	}
+	
+	public int calculateScore(Vector<Card> turnedCardsBuffer) {
+			
+		int rankSum = 0;
+		//Calculate the sum of ranks 
+		//Special consideration for the special ranks are represented in the switch
+		for(int i = 0; i < this.getTurnedCardsBuffer().size(); i++) {
+			switch(this.getTurnedCardsBuffer().get(i).getRank()) {
+			case "a":
+				rankSum +=20;
+				break;
+			case "k":
+				rankSum += 13;
+				break;
+			case "q":
+				rankSum += 12;
+				break;
+			case "j":
+				rankSum += 11;
+				break;
+			case "t":
+				rankSum +=10;
+				break;
+			default:
+				rankSum += Integer.parseInt(this.getTurnedCardsBuffer().get(i).getRank());
+			}
+		}
+		
+		int score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
+		return score;
+		
 	}
 }
