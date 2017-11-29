@@ -33,9 +33,16 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         super();
         JMenuBar menuBar = this.getJMenuBar();
         JMenu memoryMenu = null;
+        JMenu helpMenu = null;
         for (int i = 0; i < menuBar.getMenuCount(); i++) {
             if (menuBar.getMenu(i).getText().equals("Memory")) {
                 memoryMenu = menuBar.getMenu(i);
+                break;
+            }
+        }
+        for (int i = 0; i < menuBar.getMenuCount(); i++) {
+            if (menuBar.getMenu(i).getText().equals("Help")) {
+                helpMenu = menuBar.getMenu(i);
                 break;
             }
         }
@@ -48,7 +55,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
                     else if(e.getActionCommand().equals("Equal Pair Level")) newGame("updatedEqualPair");
                     else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("updatedRankTrio");
                     else if(e.getActionCommand().equals("Easy Level")) newGame("updatedEasyLevel");
-                    else if(e.getActionCommand().equals("How To Play")) showInstructionss();
+                    else if(e.getActionCommand().equals("How To Play")) showInstructions();
                 } catch (IOException e2) {
                     e2.printStackTrace(); throw new RuntimeException("IO ERROR");
                 }
@@ -59,6 +66,8 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         memoryMenu.remove(memoryMenu.getItem(0));
         memoryMenu.remove(memoryMenu.getItem(0));
         memoryMenu.remove(memoryMenu.getItem(0));
+        //Remove old how to play to later on replace it
+        helpMenu.remove(helpMenu.getItem(0));
 
         
         JMenuItem updatedEasyLevelItem = new JMenuItem("Easy Level");
@@ -76,6 +85,11 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         JMenuItem flushLevelMenuItem = new JMenuItem("Flush Level");
         flushLevelMenuItem.addActionListener(menuHandler);
         memoryMenu.add(flushLevelMenuItem);
+        
+        JMenuItem howToPlayItem = new JMenuItem("How To Play");
+        howToPlayItem.addActionListener(menuHandler);
+        helpMenu.add(howToPlayItem);
+        
     }
 
     /**
@@ -138,7 +152,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
        this.setVisible(true);
     }
     
-    private void showInstructionss()
+    private void showInstructions()
 	{
 		dprintln("MemoryGame.showInstructions()");
 		final String HOWTOPLAYTEXT = 
@@ -168,10 +182,11 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						"cards until you have discovered all of the pairs.  The game\r\n"+
 						"is won when all cards are face up.\r\n"+
 						"\r\n"+
-						"FLUSH LEVEL"+
-						"The level consist of a grid of distinct cards. The objective is"+
-						"to discover five cards that have the same suit. Once all possible"+
-						"five card matches are made, the game is won."+
+						"FLUSH Level"+
+						"\r\n"+
+						"The level consist of a grid of distinct cards. (Same as SAME RANK TRIO LEVEL) \r\n"+
+						"The objective is to discover five cards that have the same suit.\r\n"+
+						" Once all possible  five card matches are made, the game is won. \r\n"+
 						"\r\n"+
 						"Each time you flip two cards up, the turn counter will\r\n"+
 						"increase.  Try to win the game in the fewest number of turns!";
