@@ -45,25 +45,37 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             	dprintln("actionPerformed " + e.getActionCommand());
                 try {
                     if(e.getActionCommand().equals("Flush Level")) newGame("flushlevel");
-                    else if(e.getActionCommand().equals("Equal Pairr Level")) newGame("updatedEqualPair");
-                    else if(e.getActionCommand().equals("Same Rank Trio Levell")) newGame("updatedRankTrio");
+                    else if(e.getActionCommand().equals("Equal Pair Level")) newGame("updatedEqualPair");
+                    else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("updatedRankTrio");
+                    else if(e.getActionCommand().equals("Easy Level")) newGame("updatedEasyLevel");
+                    else if(e.getActionCommand().equals("How To Play")) showInstructionss();
                 } catch (IOException e2) {
                     e2.printStackTrace(); throw new RuntimeException("IO ERROR");
                 }
             }
         };
-
-        JMenuItem flushLevelMenuItem = new JMenuItem("Flush Level");
-        flushLevelMenuItem.addActionListener(menuHandler);
-        memoryMenu.add(flushLevelMenuItem);
         
-        JMenuItem updatedEqualPairMenuItem = new JMenuItem("Equal Pairr Level");
+        //Removes the old Easy Level, Equal Pair, and Rank Trio Levels
+        memoryMenu.remove(memoryMenu.getItem(0));
+        memoryMenu.remove(memoryMenu.getItem(0));
+        memoryMenu.remove(memoryMenu.getItem(0));
+
+        
+        JMenuItem updatedEasyLevelItem = new JMenuItem("Easy Level");
+        updatedEasyLevelItem.addActionListener(menuHandler);
+        memoryMenu.add(updatedEasyLevelItem);
+        
+        JMenuItem updatedEqualPairMenuItem = new JMenuItem("Equal Pair Level");
         updatedEqualPairMenuItem.addActionListener(menuHandler);
         memoryMenu.add(updatedEqualPairMenuItem);
         
-        JMenuItem updatedRankTrioMenuItem = new JMenuItem("Same Rank Trio Levell");
+        JMenuItem updatedRankTrioMenuItem = new JMenuItem("Same Rank Trio Level");
         updatedRankTrioMenuItem.addActionListener(menuHandler);
-        memoryMenu.add(updatedRankTrioMenuItem);
+        memoryMenu.add(updatedRankTrioMenuItem); 
+        
+        JMenuItem flushLevelMenuItem = new JMenuItem("Flush Level");
+        flushLevelMenuItem.addActionListener(menuHandler);
+        memoryMenu.add(flushLevelMenuItem);
     }
 
     /**
@@ -90,7 +102,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         }
         else if(difficultyMode.equalsIgnoreCase("updatedEqualPair")) {
         	this.setGameLevel(new UpdatedEqualPairLevel(this.getTurnCounterLabel(), this));
-        	this.getLevelDescriptionLabel().setText("Equal Pairr Level");
+        	this.getLevelDescriptionLabel().setText("Equal Pair Level");
         	this.getTurnCounterLabel().reset();
         	
         	// clear out the content pane (removes turn counter label and card field)
@@ -100,7 +112,17 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         }
         else if(difficultyMode.equalsIgnoreCase("updatedRankTrio")) {
         	this.setGameLevel(new UpdatedRankTrio(this.getTurnCounterLabel(), this));
-        	this.getLevelDescriptionLabel().setText("Same Rank Trio Levell");
+        	this.getLevelDescriptionLabel().setText("Same Rank Trio Level");
+        	this.getTurnCounterLabel().reset();
+        	
+        	// clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
+        }
+        else if(difficultyMode.equalsIgnoreCase("updatedEasyLevel")) {
+        	this.setGameLevel(new UpdatedEasyLevel(this.getTurnCounterLabel(), this));
+        	this.getLevelDescriptionLabel().setText("Easy Level");
         	this.getTurnCounterLabel().reset();
         	
         	// clear out the content pane (removes turn counter label and card field)
@@ -112,13 +134,54 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             super.newGame(difficultyMode);
         }
         
-       
-        
-     	
-   	 
-
        // show the window (in case this is the first game)
        this.setVisible(true);
     }
+    
+    private void showInstructionss()
+	{
+		dprintln("MemoryGame.showInstructions()");
+		final String HOWTOPLAYTEXT = 
+				"How To Play\r\n" +
+						"\r\n" +
+						"EQUAL PAIR Level\r\n"+
+						"The game consists of 8 pairs of cards.  At the start of the game,\r\n"+
+						"every card is face down.  The object is to find all the pairs and\r\n"+
+						"turn them face up.\r\n"+
+						"\r\n"+
+						"Click on two cards to turn them face up. If the cards are the \r\n"+
+						"same, then you have discovered a pair.  The pair will remain\r\n"+
+						"turned up.  If the cards are different, they will flip back\r\n"+
+						"over automatically after a short delay.  Continue flipping\r\n"+
+						"cards until you have discovered all of the pairs.  The game\r\n"+
+						"is won when all cards are face up.\r\n"+
+						"\r\n"+
+						"SAME RANK TRIO Level\r\n"+
+						"The game consists of a grid of distinct cards.  At the start of the game,\r\n"+
+						"every card is face down.  The object is to find all the trios \r\n"+
+						"of cards with the same rank and turn them face up.\r\n"+
+						"\r\n"+
+						"Click on three cards to turn them face up. If the cards have the \r\n"+
+						"same rank, then you have discovered a trio.  The trio will remain\r\n"+
+						"turned up.  If the cards are different, they will flip back\r\n"+
+						"over automatically after a short delay.  Continue flipping\r\n"+
+						"cards until you have discovered all of the pairs.  The game\r\n"+
+						"is won when all cards are face up.\r\n"+
+						"\r\n"+
+						"FLUSH LEVEL"+
+						"The level consist of a grid of distinct cards. The objective is"+
+						"to discover five cards that have the same suit. Once all possible"+
+						"five card matches are made, the game is won."+
+						"\r\n"+
+						"Each time you flip two cards up, the turn counter will\r\n"+
+						"increase.  Try to win the game in the fewest number of turns!";
+
+		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
+				, "How To Play", JOptionPane.PLAIN_MESSAGE);
+	}
+
+	/**
+	 * Shows an dialog box with information about the program
+	 */
 
 }
