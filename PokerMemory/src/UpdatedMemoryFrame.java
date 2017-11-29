@@ -56,6 +56,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
                     else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("updatedRankTrio");
                     else if(e.getActionCommand().equals("Easy Level")) newGame("updatedEasyLevel");
                     else if(e.getActionCommand().equals("How To Play")) showInstructions();
+                    else if(e.getActionCommand().equals("Scoring")) showScoreInstructions();
                 } catch (IOException e2) {
                     e2.printStackTrace(); throw new RuntimeException("IO ERROR");
                 }
@@ -69,7 +70,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         //Remove old how to play to later on replace it
         helpMenu.remove(helpMenu.getItem(0));
 
-        
+        //Memory Menu Items
         JMenuItem updatedEasyLevelItem = new JMenuItem("Easy Level");
         updatedEasyLevelItem.addActionListener(menuHandler);
         memoryMenu.add(updatedEasyLevelItem);
@@ -86,9 +87,15 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         flushLevelMenuItem.addActionListener(menuHandler);
         memoryMenu.add(flushLevelMenuItem);
         
+        //Help Menu Items
         JMenuItem howToPlayItem = new JMenuItem("How To Play");
         howToPlayItem.addActionListener(menuHandler);
         helpMenu.add(howToPlayItem);
+        
+        JMenuItem scoringItem = new JMenuItem("Scoring");
+        scoringItem.addActionListener(menuHandler);
+        helpMenu.add(scoringItem);
+        
         
     }
 
@@ -193,10 +200,46 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 
 		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);
+		/**
+		 * Shows an dialog box with information about the program
+		 */
 	}
+    
+    private void showScoreInstructions()
+   	{
+   		dprintln("MemoryGame.showScoreInstructions()");
+   		final String SCORINGTEXT = 
+   				"Scoring for each game level: \r\n" +
+   						"\r\n" +
+   						"EQUAL PAIR Level:\r\n"+
+   						"50 points for each matching pair. \r\n"+
+   						"-5 points for each unsuccessful turn.\r\n"+
+   						"\r\n"+
+   						"SAME RANK TRIO Level:\r\n"+
+   						"100 points for each matching trio \r\n"+
+   						"+ the sum of the ranks of the cards revealed. \r\n"+
+   						"-5 points for each unsuccessful turn.\r\n"+
+   						"\r\n"+
+   						"FLUSH Level:\r\n"+
+   						"700 for each matching five card hand \r\n"+
+   						"+ the sum of the ranks of the cards revealed. \r\n"+
+   						"-5 points for each unsuccessful turn.\r\n"+
+   						"\r\n"+
+   						"Special Cards Values: \r\n"+
+   						"A = 20 \r\n"+
+   						"King = 13 \r\n"+
+   						"Queen = 12 \r\n"+
+   						"Jack = 11 \r\n"+
+   						"\r\n";
+   						
 
-	/**
-	 * Shows an dialog box with information about the program
-	 */
+   		JOptionPane.showMessageDialog(this, SCORINGTEXT
+   				, "Scoring", JOptionPane.PLAIN_MESSAGE);
+   		/**
+   		 * Shows an dialog box with information about the program
+   		 */
+   	}
+
+	
 
 }
