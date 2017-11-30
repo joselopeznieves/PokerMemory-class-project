@@ -23,8 +23,6 @@ public class StraightLevel extends FlushLevel{
 		super(validTurnTime, mainFrame);
 		this.getTurnsTakenCounter().setDifficultyModeLabel("Straight level");
 		this.setCardsToTurnUp(5);
-		this.setCardsPerRow(10);
-		this.setRowsPerGrid(5);
 		this.getMainFrame().setScore(getScore());
 	}
 	protected boolean turnUp(Card card) {
@@ -98,7 +96,6 @@ public class StraightLevel extends FlushLevel{
 								|| (!otherCard2.getSuit().equals(otherCard3.getSuit()))
 								|| (!otherCard3.getSuit().equals(otherCard4.getSuit()))) {
 						// All five cards are in order with at least two different suits (still doesn't reject same suits)
-							System.out.println("Hooray!!");
 							this.setScore(this.calculateScore(Order1));
 							this.getMainFrame().setScore(getScore());
 							// Five cards match, so remove them from the list (they will remain face up)

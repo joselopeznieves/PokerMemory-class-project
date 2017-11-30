@@ -53,6 +53,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
                 try {
                     if(e.getActionCommand().equals("Flush Level")) newGame("flushlevel");
                     else if(e.getActionCommand().equals("Straight Level")) newGame("straightlevel");
+                    else if(e.getActionCommand().equals("Combo Level")) newGame("combolevel");
                     else if(e.getActionCommand().equals("Equal Pair Level")) newGame("updatedEqualPair");
                     else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("updatedRankTrio");
                     else if(e.getActionCommand().equals("Easy Level")) newGame("updatedEasyLevel");
@@ -91,6 +92,10 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         JMenuItem straightLevelMenuItem = new JMenuItem("Straight Level");
         straightLevelMenuItem.addActionListener(menuHandler);
         memoryMenu.add(straightLevelMenuItem);
+        
+        JMenuItem comboLevelMenuItem = new JMenuItem("Combo Level");
+        comboLevelMenuItem.addActionListener(menuHandler);
+        memoryMenu.add(comboLevelMenuItem);
         
         
         //Help Menu Items
@@ -169,6 +174,16 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 
             // show the window (in case this is the first game)
             this.setVisible(true);
+        }
+        else if(difficultyMode.equalsIgnoreCase("combolevel")) {
+        	this.setGameLevel(new ComboLevel(this.getTurnCounterLabel(), this));
+        	this.getLevelDescriptionLabel().setText("Combo Level");
+        	this.getTurnCounterLabel().reset();
+        	
+        	// clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
         }
         else {
             super.newGame(difficultyMode);
@@ -249,6 +264,17 @@ public class UpdatedMemoryFrame extends MemoryFrame {
    						"FLUSH Level:\r\n"+
    						"700 for each matching five card hand \r\n"+
    						"+ the sum of the ranks of the cards revealed. \r\n"+
+   						"-5 points for each unsuccessful turn.\r\n"+
+   						"\r\n"+
+   						"Special Cards Values: \r\n"+
+   						"A = 20 \r\n"+
+   						"King = 13 \r\n"+
+   						"Queen = 12 \r\n"+
+   						"Jack = 11 \r\n"+
+   						"\r\n" +
+   						"STRAIGHT Level:\r\n"+
+   						"1000 for each straight ranks on a five card hand \r\n"+
+   						"+ 100 * by the highest rank. \r\n"+
    						"-5 points for each unsuccessful turn.\r\n"+
    						"\r\n"+
    						"Special Cards Values: \r\n"+
