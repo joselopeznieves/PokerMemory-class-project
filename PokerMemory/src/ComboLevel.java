@@ -1,4 +1,3 @@
-//Full house two if's first takes [(rank, rank, rank),(rank, rank)]. second takes [(rank, rank), rank , rank, rank)]
 import javax.swing.JDialog;
 import java.awt.Dialog;
 import java.util.ArrayList;
