@@ -108,32 +108,37 @@ public class FlushLevel extends RankTrioLevel {
 		int heartsCounter = 0;
 		int diamondsCounter = 0;
 		
-		for(int i = 0; i < this.getGrid().size(); i++) {
+		if(this.getTurnedCardsBuffer().size() == 0) {
 			
-			if(!this.getGrid().get(i).isFaceUp()) {
+			for(int i = 0; i < this.getGrid().size(); i++) {
+				
+				if(!this.getGrid().get(i).isFaceUp()) {
 
-				String cardSuit = this.getGrid().get(i).getSuit();
+					String cardSuit = this.getGrid().get(i).getSuit();
 
-				switch(cardSuit) {
-				case "s":
-					spadesCounter += 1;
-					if(spadesCounter == 5) return false;
-					break;
-				case "c":
-					clubCounter += 1;
-					if(clubCounter == 5) return false;
-					break;
-				case "h":
-					heartsCounter += 1;
-					if(heartsCounter == 5) return false;
-					break;
-				case "d":
-					diamondsCounter += 1;
-					if(diamondsCounter == 5) return false;
-					break;
-				}	
+					switch(cardSuit) {
+					case "s":
+						spadesCounter += 1;
+						if(spadesCounter == 5) return false;
+						break;
+					case "c":
+						clubCounter += 1;
+						if(clubCounter == 5) return false;
+						break;
+					case "h":
+						heartsCounter += 1;
+						if(heartsCounter == 5) return false;
+						break;
+					case "d":
+						diamondsCounter += 1;
+						if(diamondsCounter == 5) return false;
+						break;
+					}	
+				}
 			}
+			return true;
 		}
-		return true;
+		else return false;
+
 	}
 }
