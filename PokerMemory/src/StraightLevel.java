@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 
 public class StraightLevel extends FlushLevel{
 	
-	private int score = 0;
+	private long score = 0;
 		
 	public long getScore() {
 		return score;
 	}
 	
-	public void setScore(int score) {
+	public void setScore(long score) {
 		this.score = score;
 	}
 	
@@ -43,14 +43,13 @@ public class StraightLevel extends FlushLevel{
 				Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
 				Card otherCard3 = (Card) this.getTurnedCardsBuffer().get(2);
 				Card otherCard4 = (Card) this.getTurnedCardsBuffer().get(3);
-				Card otherCard5 = (Card) this.getTurnedCardsBuffer().get(4);
 				List<String> Order = new ArrayList<String> ();
 				List<Integer> Order1 = new ArrayList<Integer> ();
+				Order.add(card.getRank());
 				Order.add(otherCard1.getRank());
 				Order.add(otherCard2.getRank());
 				Order.add(otherCard3.getRank());
 				Order.add(otherCard4.getRank());
-				Order.add(otherCard5.getRank());
 				for (int i = 0; i < Order.size(); i++) {
 					if(((Order.get(i)).equals("a"))) {
 						Order1.add(20);	
@@ -92,32 +91,51 @@ public class StraightLevel extends FlushLevel{
 				}
 				Collections.sort(Order1);
 				System.out.println(Order1);
-				if((Order1.get(1) == Order1.get(0) + 1 && Order1.get(2) == Order1.get(1) + 1 && Order1.get(3) == Order1.get(2) + 1 && Order1.get(4) == Order1.get(3) + 1) &&
-				   (otherCard1.getSuit() != otherCard2.getSuit() || otherCard2.getSuit() != otherCard3.getSuit() || otherCard3.getSuit() != otherCard4.getSuit() || otherCard4.getSuit() != otherCard1.getSuit())) {
-					// All five cards are in order with at least two different suits (still doesn't reject same suits)
-					System.out.println("Hooray!!");
-					this.setScore(this.calculateScore(Order1));
-					this.getMainFrame().setScore(getScore());
-					this.getTurnedCardsBuffer().clear();
-					System.out.println("Question Mark?");
-					
+				if((Order1.get(1) == Order1.get(0) + 1 && Order1.get(2) == Order1.get(1) + 1 && 
+					Order1.get(3) == Order1.get(2) + 1 && Order1.get(4) == Order1.get(3) + 1)) {
+				// All five cards are in order with at least two different suits (still doesn't reject same suits)
+							System.out.println("Hooray!!");
+							this.setScore(this.calculateScore(Order1));
+							this.getMainFrame().setScore(getScore());
+							// Five cards match, so remove them from the list (they will remain face up)
+							this.getTurnedCardsBuffer().clear();
+							}
+							else{
+								this.setScore(this.getScore() - 5);
+								this.getMainFrame().setScore(getScore());
+								// The cards do not match, so start the timer to turn them down
+								this.getTurnDownTimer().start();
+							}
+					/*long c = 0, d = 0, h = 0, s = 0;
+					for(int i = 0; i < this.getTurnedCardsBuffer().size(); i++){
+						switch(this.getTurnedCardsBuffer().get(i).getSuit()) {
+						case "c":
+							c += 1;
+							break;
+						case "d":
+							d += 1;
+							break;
+						case "h":
+							h += 1;
+							break;
+						case "s":
+							s += 1;
+							break;
 				}
-				else{
-					// The cards do not match, so start the timer to turn them down
-					this.getTurnDownTimer().start();
-				}
+			}*/
 			}
 			return true;
 		}
 		return false;
 	}
 	public long calculateScore(List<Integer> Order1) {
-		if(Order1.get(4) == 14) {
-			long score = this.getScore() + 1000 + 100 * 20; //700 is the base score for uncovering a valid hand
+		System.out.println(this.getScore());
+		if(Order1.get(4).equals(14)) {
+			long score = this.getScore() + 1000 + 100 * 20; //1000 is the base score for uncovering a valid hand
 			return score;
 		}
 		else {
-			long score = this.getScore() + 1000 + 100 * Order1.get(4); //700 is the base score for uncovering a valid hand
+			long score = this.getScore() + 1000 + (long)(100 * Order1.get(4)); //1000 is the base score for uncovering a valid hand
 			return score;
 		}
 		
