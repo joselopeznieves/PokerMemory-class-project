@@ -167,8 +167,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
             this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
 
-            // show the window (in case this is the first game)
-            this.setVisible(true);
+            
         }
         else {
             super.newGame(difficultyMode);
