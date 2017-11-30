@@ -158,7 +158,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
             this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
         }
         else if(difficultyMode.equalsIgnoreCase("straightlevel")) {
-            this.setGameLevel(new FlushLevel(this.getTurnCounterLabel(), this));
+            this.setGameLevel(new StraightLevel(this.getTurnCounterLabel(), this));
             this.getLevelDescriptionLabel().setText("Straight Level");
             this.getTurnCounterLabel().reset();
 
