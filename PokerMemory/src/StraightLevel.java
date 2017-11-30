@@ -93,36 +93,30 @@ public class StraightLevel extends FlushLevel{
 				System.out.println(Order1);
 				if((Order1.get(1) == Order1.get(0) + 1 && Order1.get(2) == Order1.get(1) + 1 && 
 					Order1.get(3) == Order1.get(2) + 1 && Order1.get(4) == Order1.get(3) + 1)) {
-				// All five cards are in order with at least two different suits (still doesn't reject same suits)
+						if((!card.getSuit().equals(otherCard1.getSuit())) 
+								|| (!otherCard1.getSuit().equals(otherCard2.getSuit()))
+								|| (!otherCard2.getSuit().equals(otherCard3.getSuit()))
+								|| (!otherCard3.getSuit().equals(otherCard4.getSuit()))) {
+						// All five cards are in order with at least two different suits (still doesn't reject same suits)
 							System.out.println("Hooray!!");
 							this.setScore(this.calculateScore(Order1));
 							this.getMainFrame().setScore(getScore());
 							// Five cards match, so remove them from the list (they will remain face up)
 							this.getTurnedCardsBuffer().clear();
 							}
-							else{
-								this.setScore(this.getScore() - 5);
-								this.getMainFrame().setScore(getScore());
-								// The cards do not match, so start the timer to turn them down
-								this.getTurnDownTimer().start();
-							}
-					/*long c = 0, d = 0, h = 0, s = 0;
-					for(int i = 0; i < this.getTurnedCardsBuffer().size(); i++){
-						switch(this.getTurnedCardsBuffer().get(i).getSuit()) {
-						case "c":
-							c += 1;
-							break;
-						case "d":
-							d += 1;
-							break;
-						case "h":
-							h += 1;
-							break;
-						case "s":
-							s += 1;
-							break;
+						else{
+							this.setScore(this.getScore() - 5);
+							this.getMainFrame().setScore(getScore());
+							// The cards do not match, so start the timer to turn them down
+							this.getTurnDownTimer().start();
+						}
 				}
-			}*/
+				else{
+					this.setScore(this.getScore() - 5);
+					this.getMainFrame().setScore(getScore());
+					// The cards do not match, so start the timer to turn them down
+					this.getTurnDownTimer().start();
+				}
 			}
 			return true;
 		}
