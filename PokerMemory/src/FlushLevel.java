@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> branch 'Game_over' of https://github.com/UPRM-CIIC4010-F17/PokerMemory-git-gud.git
 import javax.swing.JFrame;
 
 public class FlushLevel extends RankTrioLevel {
