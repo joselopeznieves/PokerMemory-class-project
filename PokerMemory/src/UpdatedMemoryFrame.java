@@ -214,6 +214,13 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						"The objective is to discover five cards that have the same suit.\r\n"+
 						" Once all possible  five card matches are made, the game is won. \r\n"+
 						"\r\n"+
+						"STRAIGHT Level"+
+						"\r\n"+
+						"The game consists of a grid of distinct cards. \r\n"+
+						"The objective is to discover five cards that can be arranged in ascending order of different suits.\r\n"+
+						"i.e. 2h, 3c, 4s, 5h, and 6h. \r\n" +
+						" Once all possible  five card matches are made, the game is won. \r\n"+
+						"\r\n"+
 						"Each time you flip two cards up, the turn counter will\r\n"+
 						"increase.  Try to win the game in the fewest number of turns!";
 
