@@ -1,7 +1,3 @@
-
-
-import java.util.Vector;
-
 import javax.swing.JFrame;
 
 public class FlushLevel extends RankTrioLevel {
@@ -52,7 +48,7 @@ public class FlushLevel extends RankTrioLevel {
 						&& (card.getSuit().equals(otherCard3.getSuit()))
 						&& (card.getSuit().equals(otherCard4.getSuit()))) {
 					//Calculate and set Score
-					this.setScore(this.calculateScore(getTurnedCardsBuffer()));
+					this.setScore(this.calculateScore());
 					this.getMainFrame().setScore(getScore());
 					// Five cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
@@ -72,7 +68,7 @@ public class FlushLevel extends RankTrioLevel {
 		return false;
 	}
 	
-	public long calculateScore(Vector<Card> turnedCardsBuffer) {
+	public long calculateScore() {
 			
 		long rankSum = 0;
 		//Calculate the sum of ranks 
@@ -102,5 +98,47 @@ public class FlushLevel extends RankTrioLevel {
 		long score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
 		return score;
 		
+	}
+	
+	
+	protected boolean isGameOver(){
+		
+		int clubCounter = 0; 
+		int spadesCounter = 0;
+		int heartsCounter = 0;
+		int diamondsCounter = 0;
+		
+		if(this.getTurnedCardsBuffer().size() == 0) {
+			
+			for(int i = 0; i < this.getGrid().size(); i++) {
+				
+				if(!this.getGrid().get(i).isFaceUp()) {
+
+					String cardSuit = this.getGrid().get(i).getSuit();
+
+					switch(cardSuit) {
+					case "s":
+						spadesCounter += 1;
+						if(spadesCounter == 5) return false;
+						break;
+					case "c":
+						clubCounter += 1;
+						if(clubCounter == 5) return false;
+						break;
+					case "h":
+						heartsCounter += 1;
+						if(heartsCounter == 5) return false;
+						break;
+					case "d":
+						diamondsCounter += 1;
+						if(diamondsCounter == 5) return false;
+						break;
+					}	
+				}
+			}
+			return true;
+		}
+		else return false;
+
 	}
 }
