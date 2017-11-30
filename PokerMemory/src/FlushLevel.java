@@ -1,6 +1,6 @@
 
 
-import java.util.Vector;
+
 
 import javax.swing.JFrame;
 
@@ -52,7 +52,7 @@ public class FlushLevel extends RankTrioLevel {
 						&& (card.getSuit().equals(otherCard3.getSuit()))
 						&& (card.getSuit().equals(otherCard4.getSuit()))) {
 					//Calculate and set Score
-					this.setScore(this.calculateScore(getTurnedCardsBuffer()));
+					this.setScore(this.calculateScore());
 					this.getMainFrame().setScore(getScore());
 					// Five cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
@@ -72,7 +72,7 @@ public class FlushLevel extends RankTrioLevel {
 		return false;
 	}
 	
-	public long calculateScore(Vector<Card> turnedCardsBuffer) {
+	public long calculateScore() {
 			
 		long rankSum = 0;
 		//Calculate the sum of ranks 

@@ -1,4 +1,4 @@
-import java.util.Vector;
+
 
 import javax.swing.JFrame;
 
@@ -36,7 +36,7 @@ public class UpdatedRankTrio extends RankTrioLevel {
 				Card otherCard1 = (Card) this.getTurnedCardsBuffer().get(0);
 				Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
 				if((card.getRank().equals(otherCard1.getRank())) && (card.getRank().equals(otherCard2.getRank()))) {
-					this.setScore(this.calculateScore(getTurnedCardsBuffer())); 
+					this.setScore(this.calculateScore()); 
 					this.getMainFrame().setScore(getScore());
 					// Three cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
@@ -54,7 +54,7 @@ public class UpdatedRankTrio extends RankTrioLevel {
 		return false;
 	}
 	
-	public int calculateScore(Vector<Card> turnedCardsBuffer) {
+	public int calculateScore() {
 		
 		int rankSum = 0;
 		//Calculate the sum of ranks 
