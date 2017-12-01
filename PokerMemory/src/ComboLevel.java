@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 public class ComboLevel extends FlushLevel {
 	
 	private long score = 0;
+	private boolean forceGameOver = false;
+	
 	public long getScore() {
 		return score;
 	}
@@ -28,59 +30,78 @@ public class ComboLevel extends FlushLevel {
 	@Override
 	protected boolean turnUp(Card card) {
 		// the card may be turned
+		/*
+		 Notes about turning up in this level:
+		 The turnUp method just turns up the cards if there are less than 5 in the buffer, and 
+		 turns up the fifth card for the user to see.
+		 It does not handle any actions with the turned up cards.
+		 See dealWithTurnedUps for further explanation.
+		 */
 			if(this.getTurnedCardsBuffer().size() < getCardsToTurnUp()) 
 			{
 				// add the card to the list
 				this.getTurnedCardsBuffer().add(card);
 				if(this.getTurnedCardsBuffer().size() == getCardsToTurnUp())
 				{
-					// We are uncovering the last card in this turn
-					// Record the player's turn
+					
 					this.getTurnsTakenCounter().increment();
-					// get the other card (which was already turned up)
-					// this time we want to turn up 5
-					Card otherCard1 = (Card) this.getTurnedCardsBuffer().get(0);
-					Card otherCard2 = (Card) this.getTurnedCardsBuffer().get(1);
-					Card otherCard3 = (Card) this.getTurnedCardsBuffer().get(2);
-					Card otherCard4 = (Card) this.getTurnedCardsBuffer().get(3);
+					
+					return true;
 				}
 				return true;	
 			}
-			Object[] options = {"Royal Flush",
-	                "Straight",
-	                "Flush",
-	                "Full House",
-	                "Pass"};
-			int option = JOptionPane.showOptionDialog(this.getMainFrame(),
-					"Choose a Poker Hand: ",
-							"Options",
-							JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE,
-							null,
-							options,
-							options[4]);
-			switch(option) {
-			case 0:	//Royal Flush
-				checkRoyal();
-				break;
-			case 1: //Straight
-				checkStraight();
-				break;
-			case 2: //Flush
-				checkFlush();
-				break;
-			case 3: //Full House 
-				checkFullHouse();
-				break;
-			case 4: //Pass
-				//Subtract 5 from the score 
-				this.setScore(this.getScore() - 5);
-				this.getMainFrame().setScore(getScore());
-				// The cards do not match, so start the timer to turn them down 
-				this.getTurnDownTimer().start();
-				break;
-			}
 		return false;
+	}
+	
+	public void dealWithTurnedUps() {
+		/*
+		 This method is responsible for creating a modal dialog box for the user, and calling other methods 
+		 to do the desired action.
+		 The call of the method is done in isGameOver since there we can check if there are 
+		 five cards face up. If it were to be done in turnUp, only 4 of the five cards would be visible 
+		 before the player has to make a decision. 
+		 */
+		
+		Object[] options = {"Royal Flush",
+                "Straight",
+                "Flush",
+                "Full House",
+                "Pass",
+                "Finish Game?"};
+		int option = JOptionPane.showOptionDialog(this.getMainFrame(),
+				"Choose a Poker Hand: ",
+						"Options",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						options,
+						options[4]);
+		switch(option) {
+		case 0:	//Royal Flush
+			checkRoyal();
+			break;
+		case 1: //Straight
+			checkStraight();
+			break;
+		case 2: //Flush
+			checkFlush();
+			break;
+		case 3: //Full House 
+			checkFullHouse();
+			break;
+		case 4: //Pass
+			//Subtract 5 from the score 
+			this.setScore(this.getScore() - 5);
+			this.getMainFrame().setScore(getScore());
+			// The cards do not match, so start the timer to turn them down 
+			this.getTurnDownTimer().start();
+			break;
+		case 5: //Finish Game
+			this.forceGameOver = true;
+			break;
+		}
+		
+			
 	}
 	
 	public void checkRoyal() {
@@ -331,6 +352,24 @@ public class ComboLevel extends FlushLevel {
 		
 		long score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
 		return score;
+		
+	}
+	
+	public boolean isGameOver() {
+		
+		//Dealing with cards is done here when there are 5 visible cards to the player. 
+		if(this.getTurnedCardsBuffer().size() == 5) {
+			this.dealWithTurnedUps();
+			if(this.forceGameOver == true) return true;
+			try {
+				Thread.sleep(2000);		//Give the game a delay so it will have time to update the turnedCardsBuffer
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
 		
 	}
 }
