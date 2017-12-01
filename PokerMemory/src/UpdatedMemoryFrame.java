@@ -53,6 +53,7 @@ public class UpdatedMemoryFrame extends MemoryFrame {
                 try {
                     if(e.getActionCommand().equals("Flush Level")) newGame("flushlevel");
                     else if(e.getActionCommand().equals("Straight Level")) newGame("straightlevel");
+                    else if(e.getActionCommand().equals("Combo Level")) newGame("combolevel");
                     else if(e.getActionCommand().equals("Equal Pair Level")) newGame("updatedEqualPair");
                     else if(e.getActionCommand().equals("Same Rank Trio Level")) newGame("updatedRankTrio");
                     else if(e.getActionCommand().equals("Easy Level")) newGame("updatedEasyLevel");
@@ -91,6 +92,10 @@ public class UpdatedMemoryFrame extends MemoryFrame {
         JMenuItem straightLevelMenuItem = new JMenuItem("Straight Level");
         straightLevelMenuItem.addActionListener(menuHandler);
         memoryMenu.add(straightLevelMenuItem);
+        
+        JMenuItem comboLevelMenuItem = new JMenuItem("Combo Level");
+        comboLevelMenuItem.addActionListener(menuHandler);
+        memoryMenu.add(comboLevelMenuItem);
         
         
         //Help Menu Items
@@ -169,6 +174,16 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 
             
         }
+        else if(difficultyMode.equalsIgnoreCase("combolevel")) {
+        	this.setGameLevel(new ComboLevel(this.getTurnCounterLabel(), this));
+        	this.getLevelDescriptionLabel().setText("Combo Level");
+        	this.getTurnCounterLabel().reset();
+        	
+        	// clear out the content pane (removes turn counter label and card field)
+            BorderLayout bl  = (BorderLayout) this.getContentPane().getLayout();
+            this.getContentPane().remove(bl.getLayoutComponent(BorderLayout.CENTER));
+            this.getContentPane().add(showCardDeck(), BorderLayout.CENTER);
+        }
         else {
             super.newGame(difficultyMode);
         }
@@ -213,6 +228,13 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						"The objective is to discover five cards that have the same suit.\r\n"+
 						" Once all possible  five card matches are made, the game is won. \r\n"+
 						"\r\n"+
+						"STRAIGHT Level"+
+						"\r\n"+
+						"The game consists of a grid of distinct cards. \r\n"+
+						"The objective is to discover five cards that can be arranged in ascending order of different suits.\r\n"+
+						"i.e. 2h, 3c, 4s, 5h, and 6h. \r\n" +
+						" Once all possible  five card matches are made, the game is won. \r\n"+
+						"\r\n"+
 						"Each time you flip two cards up, the turn counter will\r\n"+
 						"increase.  Try to win the game in the fewest number of turns!";
 
@@ -241,6 +263,17 @@ public class UpdatedMemoryFrame extends MemoryFrame {
    						"FLUSH Level:\r\n"+
    						"700 for each matching five card hand \r\n"+
    						"+ the sum of the ranks of the cards revealed. \r\n"+
+   						"-5 points for each unsuccessful turn.\r\n"+
+   						"\r\n"+
+   						"Special Cards Values: \r\n"+
+   						"A = 20 \r\n"+
+   						"King = 13 \r\n"+
+   						"Queen = 12 \r\n"+
+   						"Jack = 11 \r\n"+
+   						"\r\n" +
+   						"STRAIGHT Level:\r\n"+
+   						"1000 for each straight ranks on a five card hand \r\n"+
+   						"+ 100 * by the highest rank. \r\n"+
    						"-5 points for each unsuccessful turn.\r\n"+
    						"\r\n"+
    						"Special Cards Values: \r\n"+
