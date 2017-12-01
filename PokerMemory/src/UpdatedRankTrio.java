@@ -83,5 +83,90 @@ public class UpdatedRankTrio extends RankTrioLevel {
 		return score;
 		
 	}
+	
+	public boolean isGameOver() {
+		
+		int twoCounter = 0; 
+		int threeCounter = 0;
+		int fourCounter = 0;
+		int fiveCounter = 0;
+		int sixCounter = 0;
+		int sevenCounter = 0;
+		int eightCounter = 0;
+		int nineCounter = 0;
+		int tenCounter = 0;
+		int jackCounter = 0;
+		int queenCounter = 0;
+		int kingCounter = 0;
+		int aCounter = 0;
+		
+		if(this.getTurnedCardsBuffer().size() == 0) {
+			
+			for(int i = 0; i < this.getGrid().size(); i++) {
+				
+				if(!this.getGrid().get(i).isFaceUp()) {
+
+					String cardRank = this.getGrid().get(i).getRank();
+
+					switch(cardRank) {
+					case "2":
+						twoCounter += 1;
+						if(twoCounter == 3) return false;
+						break;
+					case "3":
+						threeCounter += 1;
+						if(threeCounter == 3) return false;
+						break;
+					case "4":
+						fourCounter += 1;
+						if(fourCounter == 3) return false;
+						break;
+					case "5":
+						fiveCounter += 1;
+						if(fiveCounter == 3) return false;
+						break;
+					case "6":
+						sixCounter += 1;
+						if(sixCounter == 3) return false;
+						break;
+					case "7":
+						sevenCounter += 1;
+						if(sevenCounter == 3) return false;
+						break;
+					case "8":
+						eightCounter += 1;
+						if(eightCounter == 3) return false;
+						break;
+					case "9":
+						nineCounter += 1;
+						if(nineCounter == 3) return false;
+						break;
+					case "10":
+						tenCounter += 1;
+						if(tenCounter == 3) return false;
+						break;
+					case "j":
+						jackCounter += 1;
+						if(jackCounter == 3) return false;
+						break;
+					case "q":
+						queenCounter += 1;
+						if(queenCounter == 3) return false;
+						break;
+					case "k":
+						kingCounter += 1;
+						if(kingCounter == 3) return false;
+						break;
+					case "a":
+						aCounter += 1;
+						if(aCounter == 3) return false;
+						break;
+					}	
+				}
+			}
+			return true;
+		}
+		else return false;
+	}
 
 }
