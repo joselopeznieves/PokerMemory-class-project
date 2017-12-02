@@ -321,37 +321,7 @@ public class ComboLevel extends FlushLevel {
 			this.getTurnDownTimer().start();
 		}
 	}
-	public long calculateScore() {
-		
-		long rankSum = 0;
-		//Calculate the sum of ranks 
-		//Special consideration for the special ranks are represented in the switch
-		for(int i = 0; i < this.getTurnedCardsBuffer().size(); i++) {
-			switch(this.getTurnedCardsBuffer().get(i).getRank()) {
-			case "a":
-				rankSum +=20;
-				break;
-			case "k":
-				rankSum += 13;
-				break;
-			case "q":
-				rankSum += 12;
-				break;
-			case "j":
-				rankSum += 11;
-				break;
-			case "t":
-				rankSum +=10;
-				break;
-			default:
-				rankSum += Integer.parseInt(this.getTurnedCardsBuffer().get(i).getRank());
-			}
-		}
-		
-		long score = this.getScore() + 700 + rankSum; //700 is the base score for uncovering a valid hand
-		return score;
-		
-	}
+
 	
 	public boolean isGameOver() {
 		
