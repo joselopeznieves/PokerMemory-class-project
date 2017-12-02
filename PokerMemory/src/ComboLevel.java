@@ -1,5 +1,3 @@
-import javax.swing.JDialog;
-import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

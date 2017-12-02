@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.JFrame;
 
 public class StraightLevel extends FlushLevel{

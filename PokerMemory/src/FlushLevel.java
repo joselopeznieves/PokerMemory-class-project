@@ -101,7 +101,7 @@ public class FlushLevel extends RankTrioLevel {
 	}
 	
 	
-	protected boolean isGameOver(){
+	public boolean isGameOver(){
 		
 		int clubCounter = 0; 
 		int spadesCounter = 0;
