@@ -6,13 +6,12 @@
  * @version Sept 2017
  */
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-<<<<<<< HEAD
 
 import javax.swing.JFrame;
-=======
->>>>>>> refs/remotes/ciic4010staff/master
 import javax.swing.JOptionPane;
+
 
 public class GameManager {
 
@@ -22,7 +21,8 @@ public class GameManager {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
-		// make an instance of the main MemoryFrame game class
+		// make an instance of the main game class
+
 		int playMore = 2;
 		while (playMore != 1) {
 			UpdatedMemoryFrame instance = new UpdatedMemoryFrame();
