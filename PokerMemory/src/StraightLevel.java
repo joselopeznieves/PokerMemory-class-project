@@ -129,6 +129,17 @@ public class StraightLevel extends FlushLevel{
 		}
 		
 	}
+	public boolean isGameOver() {
+		int possibility = 7;
+		int a = 0, two = 0, three = 0, four = 0, five = 0, six = 0,
+				seven = 0, eight = 0, nine = 0, ten = 0,
+				j = 0, q = 0, k = 0;
+		for(int i = 0; i < this.getGrid().size(); i++) {
+			if(!this.getGrid().get(i).isFaceUp()) {
+				
+			}
+		}
+	}
 
 }
 
