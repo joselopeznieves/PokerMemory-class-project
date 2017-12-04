@@ -129,16 +129,126 @@ public class StraightLevel extends FlushLevel{
 		}
 		
 	}
+	int possibility = 10;
+	int a = 0, two = 0, three = 0, four = 0, five = 0, six = 0,
+			seven = 0, eight = 0, nine = 0, ten = 0,
+			j = 0, q = 0, k = 0;
 	public boolean isGameOver() {
-		int possibility = 7;
-		int a = 0, two = 0, three = 0, four = 0, five = 0, six = 0,
-				seven = 0, eight = 0, nine = 0, ten = 0,
-				j = 0, q = 0, k = 0;
-		for(int i = 0; i < this.getGrid().size(); i++) {
-			if(!this.getGrid().get(i).isFaceUp()) {
-				
+		if(this.getTurnedCardsBuffer().size() == 0) {
+			for(int i = 0; i < this.getGrid().size(); i++) {
+				if(!this.getGrid().get(i).isFaceUp()) {
+				switch(this.getTurnedCardsBuffer().get(i).getRank()) {
+					case "a":
+						a++;
+						if(a == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "2":
+						two++;
+						if(two == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "3":
+						three++;
+						if(three == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "4":
+						four++;
+						if(four == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "5":
+						five++;
+						if(five == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "6":
+						six++;
+						if(six == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "7":
+						seven++;
+						if(seven == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "8":
+						eight++;
+						if(eight == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "9":
+						nine++;
+						if(nine == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "t":
+						ten++;
+						if(ten == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "j":
+						j++;
+						if(j == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "q":
+						q++;
+						if(q == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					case "k":
+						k++;
+						if(k == 3) {
+							possibility = possibility - 2;
+							if (possibility == 0) {
+								return false;
+							}
+						}
+					}
+				}
+			
 			}
-		}
+			return true;
+			}
+		else return false;
 	}
 
 }
