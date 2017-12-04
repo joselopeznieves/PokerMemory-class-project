@@ -341,11 +341,6 @@ public class ComboLevel extends FlushLevel {
 				e.printStackTrace();
 			}
 		}
-		else if (quantity == 5) {
-			return true;
-		}
-		
 		return false;
-		
 	}
 }
