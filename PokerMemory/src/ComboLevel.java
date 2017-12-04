@@ -9,7 +9,7 @@ public class ComboLevel extends FlushLevel {
 	
 	private long score = 0;
 	private boolean forceGameOver = false;
-	
+	int quantity = 50;
 	public long getScore() {
 		return score;
 	}
@@ -142,6 +142,7 @@ public class ComboLevel extends FlushLevel {
 		if (a == 1 && k == 1 && q == 1 && j == 1 && t ==1 && samesuits == true) {
 			this.setScore(this.getScore() + 3000); //2000 is the score for uncovering a royal flush
 			this.getMainFrame().setScore(getScore());
+			quantity = quantity - 5;
 			this.getTurnedCardsBuffer().clear();
 		}
 		else {
@@ -215,6 +216,7 @@ public class ComboLevel extends FlushLevel {
 						|| (!otherCard4.getSuit().equals(otherCard5.getSuit()))) {
 				// All five cards are in order with at least two different suits (still doesn't reject same suits)
 					this.setScore(this.getScore() + 1000 + 100*Order1.get(4));
+					quantity = quantity - 5;
 					this.getMainFrame().setScore(getScore());
 					// Five cards match, so remove them from the list (they will remain face up)
 					this.getTurnedCardsBuffer().clear();
@@ -248,6 +250,7 @@ public class ComboLevel extends FlushLevel {
 				&& (otherCard4.getSuit().equals(otherCard5.getSuit()))) {
 			//Calculate and set Score
 			this.setScore(this.calculateScore());
+			quantity = quantity - 5;
 			this.getMainFrame().setScore(getScore());
 			// Five cards match, so remove them from the list (they will remain face up)
 			this.getTurnedCardsBuffer().clear();
@@ -303,12 +306,14 @@ public class ComboLevel extends FlushLevel {
 		Collections.sort(Order1);
 		if (Order1.get(0) == Order1.get(1) && Order1.get(1) == Order1.get(2) && Order1.get(3) == Order1.get(4)) {
 			this.setScore(this.getScore() + 500 + 100*Order1.get(4));
+			quantity = quantity - 5;
 			this.getMainFrame().setScore(getScore());
 			// Five cards match, so remove them from the list (they will remain face up)
 			this.getTurnedCardsBuffer().clear();
 		}
 		else if (Order1.get(0) == Order1.get(1) && Order1.get(2) == Order1.get(3) && Order1.get(3) == Order1.get(4)) {
 			this.setScore(this.getScore() + 500 + 100*Order1.get(4));
+			quantity = quantity - 5;
 			this.getMainFrame().setScore(getScore());
 			// Five cards match, so remove them from the list (they will remain face up)
 			this.getTurnedCardsBuffer().clear();
@@ -335,6 +340,9 @@ public class ComboLevel extends FlushLevel {
 				
 				e.printStackTrace();
 			}
+		}
+		else if (quantity == 5) {
+			return true;
 		}
 		
 		return false;

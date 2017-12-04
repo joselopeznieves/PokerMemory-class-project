@@ -222,7 +222,11 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						" Once all possible  five card matches are made, the game is won. \r\n"+
 						"\r\n"+
 						"Each time you flip two cards up, the turn counter will\r\n"+
-						"increase.  Try to win the game in the fewest number of turns!";
+						"increase.  Try to win the game in the fewest number of turns!" +
+						"\r\n" +
+						"COMBO Level"+
+						"\r\n"+
+						"Choose five cards and a menu will appear to be evaluated or PASS";
 
 		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);
@@ -267,7 +271,8 @@ public class UpdatedMemoryFrame extends MemoryFrame {
    						"King = 13 \r\n"+
    						"Queen = 12 \r\n"+
    						"Jack = 11 \r\n"+
-   						"\r\n";
+   						"\r\n"+
+   						"COMBO Level";
    						
 
    		JOptionPane.showMessageDialog(this, SCORINGTEXT
