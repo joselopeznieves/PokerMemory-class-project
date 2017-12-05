@@ -217,16 +217,28 @@ public class UpdatedMemoryFrame extends MemoryFrame {
 						"STRAIGHT Level"+
 						"\r\n"+
 						"The game consists of a grid of distinct cards. \r\n"+
-						"The objective is to discover five cards that can be arranged in ascending order of different suits.\r\n"+
+						"The objective is to discover five cards that can be arranged \r\n"+
+						"in ascending order of different suits.\r\n"+
 						"i.e. 2h, 3c, 4s, 5h, and 6h. \r\n" +
 						" Once all possible  five card matches are made, the game is won. \r\n"+
 						"\r\n"+
-						"Each time you flip two cards up, the turn counter will\r\n"+
-						"increase.  Try to win the game in the fewest number of turns!" +
-						"\r\n" +
 						"COMBO Level"+
 						"\r\n"+
-						"Choose five cards and a menu will appear to be evaluated or PASS";
+						"The COMBO Level features a mix of the FLUSH level, the STRAIGHT level, \r\n"+
+						"And two other poker hands: the FULL HOUSE and the ROYAL FLUSH. \r\n"+
+						"The FULL HOUSE is obtained when you uncover three cards of one rank, \r\n"+
+						"followed by two cards of another rank. The ROYAL FLUSH consists of \r\n"+
+						"uncovering a king, a queen, a jack, and a ten suit. Once you have \r\n"+
+						"uncovered five cards, the COMBO level lets you choose how do you want \r\n"+
+						"to evaluate your hand. Did you uncovered a STRAIGHT? Or maybe a FULL HOUSE \r\n"+
+						"suits your uncovered hand? The choise is yours! If you do not like your hand, \r\n"+
+						"just press the PASS button and the cards will be covered again."+
+						"\r\n"+
+						"\r\n"+
+						"Try to win the game in the least amount of turns \r\n"+
+						"while achieving the highest score!";
+						
+						
 
 		JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT
 				, "How To Play", JOptionPane.PLAIN_MESSAGE);
@@ -254,25 +266,26 @@ public class UpdatedMemoryFrame extends MemoryFrame {
    						"700 for each matching five card hand \r\n"+
    						"+ the sum of the ranks of the cards revealed. \r\n"+
    						"-5 points for each unsuccessful turn.\r\n"+
-   						"\r\n"+
-   						"Special Cards Values: \r\n"+
-   						"A = 20 \r\n"+
-   						"King = 13 \r\n"+
-   						"Queen = 12 \r\n"+
-   						"Jack = 11 \r\n"+
    						"\r\n" +
    						"STRAIGHT Level:\r\n"+
    						"1000 for each straight ranks on a five card hand \r\n"+
    						"+ 100 * by the highest rank. \r\n"+
    						"-5 points for each unsuccessful turn.\r\n"+
    						"\r\n"+
+   						"COMBO Level: \r\n"+
+   						"Scores for FLUSH and STRAIGHT hands stay the same \r\n"+
+   						"For the ROYAL FLUSH hand: 3000 for uncovered hand \r\n"+
+   						"For the FULL HOUSE hand: 500 \r\n"+
+   						"+ 100 * the highest rank of the uncovered cards.\r\n"+
+   						"-5 points for unsuccessful turn and for each PASS \r\n"+
+   						"\r\n"+
    						"Special Cards Values: \r\n"+
    						"A = 20 \r\n"+
    						"King = 13 \r\n"+
    						"Queen = 12 \r\n"+
    						"Jack = 11 \r\n"+
-   						"\r\n"+
-   						"COMBO Level";
+   						"\r\n";
+   						
    						
 
    		JOptionPane.showMessageDialog(this, SCORINGTEXT
